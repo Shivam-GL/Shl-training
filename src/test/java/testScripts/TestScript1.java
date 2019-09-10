@@ -22,7 +22,7 @@ public void initBrowser() {
 }
 	
 @Test
-  public void f() {
+  public void test1() {
 	 System.out.println("test"); 
 	homepage=pageobjectmanager.getHomePage();
   }
