@@ -12,8 +12,8 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class Launch {
 		private WebDriver driver;
-		String browerName = Constants.BROWSER;
-		String driverPath = Constants.DRIVERPATH;
+		private String browerName = Constants.BROWSER;
+		
 		
 @BeforeClass
 public  void initWebDriver() {
