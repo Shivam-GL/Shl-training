@@ -6,6 +6,7 @@ import org.testng.annotations.Test;
 
 
 import pages.HomePage;
+import utilities.Constants;
 import utilities.Launch;
 import utilities.PageObjectManager;
 
@@ -18,6 +19,7 @@ public class TestScript1 extends Launch{
 @BeforeMethod
 public void initBrowser() {
 	driver=getWebDriver();
+	driver.get(Constants.URL);
 	pageobjectmanager = new PageObjectManager(driver);
 }
 	
