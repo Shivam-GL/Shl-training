@@ -8,6 +8,6 @@ public class Constants {
 	public final static String EXCELPATH="";
 	public final static String DRIVERPATH="chromedriver_v75.exe";
 
-	public final static String EXCELPATH="";
+	
 
 }
