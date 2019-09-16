@@ -6,6 +6,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
@@ -15,7 +16,7 @@ public class Launch {
 		private String browerName = Constants.BROWSER;
 		
 		
-@BeforeClass
+@BeforeMethod
 public  void initWebDriver() {
 			  switch(browerName) {
 				case "Chrome": WebDriverManager.chromedriver().setup();
@@ -32,10 +33,10 @@ public  void initWebDriver() {
 				}
 		  }
 
-@AfterClass
-public void quitDriver() {
-	driver.quit();
-}
+//@AfterClass
+//public void quitDriver() {
+//	driver.quit();
+//}
 
 public WebDriver getWebDriver() {
 	return driver;
