@@ -79,8 +79,10 @@ public class second_secenario_workpage extends BaseClass
 	{
 		int index=minimum_price(number);
 		String product_name=driver.findElement(By.xpath("(//div[@class='row']//a)["+index+"]")).getText();
-		//(//div[@class='row']//a)[3]
-		System.out.println(product_name);
+		String price=driver.findElement(By.xpath("(//div[@class='_1vC4OE'])["+index+"]")).getText();
+		//xpath of minimum element=(//div[@class='row']//a)[3]
+		System.out.println("Product name: "+product_name);
+		System.out.println("Product price: "+price);
 	}
 	
 }
