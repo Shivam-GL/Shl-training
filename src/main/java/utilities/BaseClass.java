@@ -4,42 +4,66 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Action;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class BaseClass {
 	
 	WebDriver driver;
-	
+	Actions action;
+	/*
+	 * Initialize constructor
+	 * */
 	public BaseClass(WebDriver driver) {
 		this.driver=driver;
-	}
-	public void clickBtn(WebElement button) {
-		 button.click();
-	}
-	public void enterInput(WebElement inputField,String inputValue) {
-		inputField.sendKeys(inputValue);
-	}
-	public void clearText(WebElement inputField) {
-		inputField.clear();
+		action=new Actions(driver);
 	}
 	
-	public void Scroll() {
-		 JavascriptExecutor js=(JavascriptExecutor)driver;
-		 js.executeScript("window.scrollBy(0,1000)");
-	}
-	public void waitCondition(WaitExpectedConditions conditions,By locator,int timeOut) {
+	/*
+	 * Initialize constructor
+	 * */
+	public void waitCondition(WaitExpectedConditions conditions,WebElement element,int timeOut) {
 		WebDriverWait wait=new WebDriverWait(driver,timeOut);
+		
 		switch (conditions)
 		{
 		case PRESENCE_OF_ELEMENT:
-							wait.until(ExpectedConditions.presenceOfElementLocated(locator));
+							wait.until(ExpectedConditions.visibilityOf(element));
 							break;
 		case ELEMENT_TO_BE_CLICKABLE: 
-						  wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+						  wait.until(ExpectedConditions.elementToBeClickable(element));
 						  break;	
 		}
 	}
 	
+	public void clickBtn(WebElement button) {
+
+		waitCondition(WaitExpectedConditions.ELEMENT_TO_BE_CLICKABLE, button, 30);
+		 button.click();
+	}
+	public void enterInput(WebElement inputField,String inputValue) {
+		waitCondition(WaitExpectedConditions.PRESENCE_OF_ELEMENT, inputField, 30);
+		inputField.sendKeys(inputValue);
+	}
+	public void clearText(WebElement inputField) {
+		waitCondition(WaitExpectedConditions.PRESENCE_OF_ELEMENT, inputField, 30);
+		inputField.clear();
+	}
+	
+	public void Scroll() {
+		
+		 JavascriptExecutor js=(JavascriptExecutor)driver;
+		 js.executeScript("window.scrollBy(0,1000)");
+	}
+	
+public void hoverAndClick(WebElement hoverTo) {
+		Action set1=action
+			.moveToElement(hoverTo)
+			.build();
+			set1.perform();
+	
+	}
 	
 }

@@ -32,11 +32,11 @@ public  void initWebDriver() {
 				}
 		  }
 
-@AfterClass
+/*@AfterClass
 public void quitDriver() {
 	driver.quit();
 }
-
+*/
 public WebDriver getWebDriver() {
 	return driver;
 }
