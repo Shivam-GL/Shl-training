@@ -12,23 +12,28 @@ import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
 
 import utilities.BaseClass;
 import utilities.ProductDetails;
-import utilities.WaitExpectedConditions;
+
+
 
 public class ProductSearchPage extends BaseClass {
 
 
 	WebDriver driver;
 	String star;
-	String review;
+	String rating;
 	int highestRating=0;
+	String highestRatingString;
 	int currentRating;
-	
-	
-	@FindBy (xpath="//div[@data-id]")
-	List<WebElement> products;
+
+
+	@FindBy (xpath="//div[@data-id]//span[contains(text(),'(')]")
+	List<WebElement> productRating;
+
+	@FindBy(xpath="//div[@data-id]//div//a//div//div[2]//div//div//input")
+	List<WebElement> addToCompare;
 
 	ProductDetails product;
-	ArrayList<ProductDetails> productDetails;
+	ArrayList<WebElement> highestRatedProduct;
 
 
 	public ProductSearchPage(WebDriver driver) {
@@ -36,69 +41,32 @@ public class ProductSearchPage extends BaseClass {
 		this.driver=driver;
 		AjaxElementLocatorFactory factory=new AjaxElementLocatorFactory(driver,100);
 		PageFactory.initElements(factory, this);
-		productDetails=new ArrayList<ProductDetails>();
+		highestRatedProduct=new ArrayList<WebElement>();
 	}
 
-	public ArrayList<ProductDetails> getProducts() {
+	public void getProducts() {
+		getHighestCurrentRating();
+		highestRatedProduct=(ArrayList<WebElement>) driver.findElements(By.xpath("//span[contains(text(),'"+highestRatingString+"')]"));
+		for(WebElement highestRating:highestRatedProduct) {
+			System.out.println(highestRating.findElement(By.xpath("./parent::div/preceding-sibling::a[1]")).getText());
+			System.out.println(highestRating.findElement(By.xpath("./preceding-sibling::span")).getText());
+			System.out.println(highestRatingString);
+		}
 
-		for(WebElement prod:products) {
-			setCurrentRating(prod);
-			if (productDetails.size()==0) {
+	}
+
+	//function to get the highest product rating 
+	public void getHighestCurrentRating() {
+		for(WebElement prod:productRating) {
+			String currentratingString;
+			rating=prod.getText();
+			currentratingString= rating.replaceAll("\\p{P}","").replaceAll(",","");
+			currentRating=Integer.parseInt(currentratingString);
+			if(currentRating>highestRating) {
 				highestRating=currentRating;
-				addProductToList(prod,currentRating);
-			}
-			else if(currentRating>highestRating) {
-				productDetails.clear();
-				highestRating=currentRating;
-				addProductToList(prod,currentRating);
-			}
-			
-			else if(currentRating==highestRating) {
+				highestRatingString=rating;
 				
-				addProductToList(prod,highestRating);
 			}
-			
 		}
-		
-		return productDetails;
 	}
-	
-	//function to add product to list
-	public void addProductToList(WebElement prod,int currentRating) {
-		product=new ProductDetails();
-		product.setRatings(currentRating);
-		//enter star rating
-		try {
-		star = prod.findElement(By.xpath(".//div[@class=\"hGSR34\"]")).getText();
-		star=star.replaceAll("\"","");
-		product.setStar(Float.parseFloat(star));
-		}
-		catch(Exception e) {
-			product.setStar(0);
-		}
-		//enter name
-		product.setPrdoname(prod.findElement(By.xpath("div/a[2]")).getText());
-		// adding product to list
-		
-		productDetails.add(product);
-	}
-	
-	
-	//function to set the product rating as current rating
-	public void setCurrentRating(WebElement prod) {
-		try {
-			
-			review=prod.findElement(By.xpath(".//span[@class=\"_38sUEc\"]")).getText();
-			review= review.replaceAll("\\p{P}","").replaceAll(",","");
-			currentRating=Integer.parseInt(review);
-			
-		}
-		catch(Exception e) {
-			currentRating=0;
-			product.setRatings(currentRating);
-		}
-		
-		
-	}
-
 }
