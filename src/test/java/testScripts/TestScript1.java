@@ -1,54 +1,64 @@
 package testScripts;
 
-import java.awt.AWTException;
-import java.awt.Robot;
-import java.awt.event.KeyEvent;
-import java.util.List;
-
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import pages.Camera_Product;
+import pages.Comparision;
 import pages.HomePage;
-import pages.second_secenario_workpage;
-import utilities.BaseClass;
+import pages.Product;
+import pages.Second_Secenario_Workpage;
 import utilities.Constants;
 import utilities.Launch;
-import utilities.PageObjectManager;
-import utilities.WaitExpectedConditions;
+
 
 public class TestScript1 extends Launch {
 
 	WebDriver driver;
 	HomePage homepage;
-	second_secenario_workpage workpage;
+	Second_Secenario_Workpage workpage;
+	Product page;
+	Camera_Product product;
+	Comparision newpage;
+
 	@BeforeMethod
-	public void initBrowser() {
+	public void initBrowser() 
+	{
 		driver = getWebDriver();
 		homepage = new HomePage(driver);
-		workpage=new second_secenario_workpage(driver);
+		workpage=new Second_Secenario_Workpage(driver);
+		page=new Product(driver);
+		product=new Camera_Product(driver);
+		newpage=new Comparision(driver);
 	}
 
+	/**For First Secenario
+	 * 
+	 */
 	@Test
-	public void test1() {
+	public void test1() 
+	{
 		driver.get(Constants.URL);
-		homepage.remove_login_popup();
-		homepage.enter_input(Constants.search_term);
-		homepage.clck_searchbtn();
-		homepage.print();
+		homepage.remove_Login_Popup();
+		homepage.enter_Input(Constants.search_term);
+		homepage.clck_Searchbtn();
+		page.print_Product();
+		
 
 	}
 
+	/**For Second Secenario
+	 * 
+	 */
 	@Test
-	public void test2() {
+	public void test2() 
+	{
 		driver.get(Constants.URL);
-		workpage.remove_login_popup();
-		workpage.open_camera();
-		workpage.compare(3);
-		workpage.check(3);
-		workpage.product_wanted(3);
+		workpage.remove_Login_Popup();
+		workpage.open_Camera();
+		product.compare(3);
+		newpage.check(3);
+		newpage.product_Wanted(3);
 	}
 }
