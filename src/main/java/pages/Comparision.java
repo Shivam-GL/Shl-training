@@ -7,12 +7,13 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 
+import logs.CreateLog;
 import utilities.BaseClass;
 import utilities.WaitExpectedConditions;
-
 public class Comparision extends BaseClass 
 {
 	WebDriver driver;
+	CreateLog log=new CreateLog();
 	public Comparision(WebDriver driver) 
 	{
 		super(driver);
@@ -72,9 +73,8 @@ public class Comparision extends BaseClass
 		int index=minimum_Price(number);
 		String product_name=driver.findElement(By.xpath("(//div[@class='row']//a)["+index+"]")).getText();
 		String price=driver.findElement(By.xpath("(//div[@class='row'][2]//div[contains(text(),'₹')][1])["+index+"]")).getText();
-
-		System.out.println("Product name: "+product_name);
-		System.out.println("Product price: "+price);
+		log.writeLog("Product name: ", product_name);
+		log.writeLog("Product price: ", price);
 	}
 
 }
