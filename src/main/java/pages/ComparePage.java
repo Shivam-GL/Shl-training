@@ -12,7 +12,7 @@ import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
 import utilities.BaseClass;
 
 public class ComparePage extends BaseClass {
-	WebDriver driver;
+	private WebDriver driver;
 
 	@FindBy(xpath="//span[contains(text(),'Add to Compare')]")
 	List<WebElement> checkboxList;

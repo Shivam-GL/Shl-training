@@ -18,12 +18,12 @@ import utilities.ProductDetails;
 public class ProductSearchPage extends BaseClass {
 
 
-	WebDriver driver;
-	String star;
-	String rating;
-	int highestRating=0;
-	String highestRatingString;
-	int currentRating;
+    private WebDriver driver;
+	
+	private String rating;
+	private int highestRating=0;
+	private String highestRatingString;
+	private int currentRating;
 
 
 	@FindBy (xpath="//div[@data-id]//span[contains(text(),'(')]")
@@ -44,6 +44,9 @@ public class ProductSearchPage extends BaseClass {
 		highestRatedProduct=new ArrayList<WebElement>();
 	}
 
+	/**
+	 * function to print highest rated products
+	 */
 	public void getProducts() {
 		getHighestCurrentRating();
 		highestRatedProduct=(ArrayList<WebElement>) driver.findElements(By.xpath("//span[contains(text(),'"+highestRatingString+"')]"));

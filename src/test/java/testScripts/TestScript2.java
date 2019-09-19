@@ -21,6 +21,7 @@ public class TestScript2 extends Launch {
 	public void initBrowser() {
 		//fetching driver
 		driver=getWebDriver();
+		goToUrl(Constants.URL);
 		// initializing page objects
 		homepage=new HomePage(driver);
 		comparePage=new ComparePage(driver);

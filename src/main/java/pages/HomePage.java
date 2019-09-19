@@ -7,7 +7,7 @@ import org.openqa.selenium.support.PageFactory;
 import utilities.BaseClass;
 
 public class HomePage extends BaseClass{
-	WebDriver driver;
+	private WebDriver driver;
 	
 	@FindBy (xpath="//button[text()='✕']")
 	WebElement modalClosebtn;

@@ -1,8 +1,5 @@
 package testScripts;
 
-
-import java.util.ArrayList;
-
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -13,7 +10,6 @@ import pages.ProductSearchPage;
 import utilities.Constants;
 import utilities.Launch;
 
-import utilities.ProductDetails;
 
 public class TestScript1 extends Launch{
 
@@ -21,12 +17,12 @@ public class TestScript1 extends Launch{
 	HomePage homepage;
 
 	ProductSearchPage productsearchpage;
-	ArrayList<ProductDetails> details;
 
 	@BeforeMethod
 	public void initBrowser() {
 		//fetching driver
 		driver=getWebDriver();
+		goToUrl(Constants.URL);
 		// initializing page objects
 		homepage=new HomePage(driver);
 		productsearchpage=new ProductSearchPage(driver);
