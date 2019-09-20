@@ -1,5 +1,7 @@
 package testScripts;
 
+import java.lang.reflect.Method;
+
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -29,9 +31,10 @@ public class TestScript1 extends Launch{
 	}
 
 	@Test
-	public void test1() {
+	public void test1(Method method) {
 		homepage.closeModal();
 		homepage.searchProduct("earphones");
+		method.getName();
 		productsearchpage.getProducts();
 
 	}

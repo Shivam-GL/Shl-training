@@ -70,10 +70,9 @@ public class BaseClass {
 		inputField.clear();
 	}
 
-	public void Scroll() {
-
+	public void Scroll(WebElement e) {
 		JavascriptExecutor js=(JavascriptExecutor)driver;
-		js.executeScript("window.scrollBy(0,1000)");
+		js.executeScript("arguments[0].scrollIntoView();",e);
 	}
 
 	public void hoverAndClick(WebElement hoverTo) {

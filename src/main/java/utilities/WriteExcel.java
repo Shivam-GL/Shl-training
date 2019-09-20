@@ -1,5 +1,8 @@
 package utilities;
 
+import java.io.Closeable;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
@@ -8,36 +11,54 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 public class WriteExcel {
-
+	private FileInputStream fis;
 	private FileOutputStream fileOutputStream;
 	private XSSFWorkbook workbook;
 	private XSSFRow row;
 	private XSSFSheet sheet;
 	private String filename;
-
-	public WriteExcel() {
-		filename = Constants.EXCELPATH;
+File file;
+	public WriteExcel(String excelPath) {
+		filename = excelPath;
 		workbook = new XSSFWorkbook();
-		sheet = workbook.createSheet("FirstSheet");  
+		sheet = workbook.createSheet("FirstSheet"); 
+		System.out.println("constructor run");
 	}
 
 	//entering data in excel
-	public void createExcel(String url,String browser) {
-
+	public void createExcel() {
+		System.out.println("creating file");
 		try {
-			row = sheet.createRow(0);
-			row.createCell(0).setCellValue("URL");
-			row.createCell(1).setCellValue("Browser");
-			row = sheet.createRow(1);
-			row.createCell(0).setCellValue(url);
-			row.createCell(1).setCellValue(browser);
+			
 			fileOutputStream = new FileOutputStream(filename);
 			workbook.write(fileOutputStream);
 			fileOutputStream.close();
+			
 		} 
 		catch (IOException e) {
 			e.printStackTrace();
 		}
-		
+		System.out.println("file created");
 	}
+	
+	public void enterExcelData(String excelPath,String sheetName,int rowIndex,int colIndex,String data) {
+		try {	
+				file=new File(excelPath);
+				fis=new FileInputStream(file);
+				workbook=new XSSFWorkbook(fis);
+				XSSFSheet sheet1 = workbook.getSheet(sheetName);
+				if(sheet1.getRow(rowIndex)==null) {
+					sheet1.createRow(rowIndex).createCell(colIndex).setCellValue(data);
+				}
+				else {
+					sheet1.getRow(rowIndex).createCell(colIndex).setCellValue(data);
+				}
+				fileOutputStream = new FileOutputStream(excelPath);
+				workbook.write(fileOutputStream);
+				fileOutputStream.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				
+			} 
 }
