@@ -35,7 +35,7 @@ public class Second_Secenario_Workpage extends BaseClass
 	 */
 	public void open_Camera()
 	{
-		actions(menuOption);
+		moveToElement_ByAction(menuOption);
 		WebElement selectMenuOption=waitCondition(WaitExpectedConditions.PRESENCE_OF_ELEMENT,By.xpath("//*[text()='Compact & Bridge Cameras']"), 10);
 		selectMenuOption.click();
 	}

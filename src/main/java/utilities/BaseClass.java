@@ -7,6 +7,7 @@ import java.awt.event.KeyEvent;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -60,21 +61,14 @@ public class BaseClass {
 	 */
 	public void escButton()
 	{
-		Robot robot;
-		try {
-			robot = new Robot();
-			robot.keyPress(KeyEvent.VK_ESCAPE);
-			 robot.keyRelease(KeyEvent.VK_ESCAPE);
-		} catch (AWTException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		 Actions action = new Actions(driver);
+		   action.sendKeys(Keys.ESCAPE).perform();
 	}
 	/**
 	 * For Actions to mouse hovering
 	 * @param req::WebElement
 	 */
-	public void actions(WebElement req)
+	public void moveToElement_ByAction(WebElement req)
 	{
 		Actions actions = new Actions(driver);
 		actions.moveToElement(req).perform();

@@ -1,6 +1,7 @@
 package testScripts;
 
 import org.openqa.selenium.WebDriver;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import pages.Camera_Product;
 import pages.Comparision;
@@ -10,15 +11,19 @@ import utilities.Launch;
 
 public class TestScript2 extends Launch{
 	
-	WebDriver driver= getWebDriver();
-	Second_Secenario_Workpage workpage=new Second_Secenario_Workpage(driver);;
-	Camera_Product product=new Camera_Product(driver);;
-	Comparision newpage=new Comparision(driver);;
+	WebDriver driver;
+	Second_Secenario_Workpage workpage;
+	Camera_Product product;
+	Comparision newpage;
 
-	
-	public void initBrowser() 
+	@BeforeClass
+	public void openBrowser() 
 	{
 		initWebDriver();
+		driver= getWebDriver();
+		workpage=new Second_Secenario_Workpage(driver);
+		product=new Camera_Product(driver);
+		newpage=new Comparision(driver);;
 		driver.get(Constants.URL);
 	}
 
