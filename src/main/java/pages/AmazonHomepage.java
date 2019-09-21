@@ -13,7 +13,7 @@ public class AmazonHomepage extends BaseClass
 	
 	@FindBy(xpath = ("//input[contains(@id,'twotabsearchtextbox')]"))
 	WebElement search_box;
-	@FindBy(xpath = ("//span[contains(@id,'nav-search-submit-text')]"))
+	@FindBy(xpath = ("//span[contains(@id,'nav-search-submit-text')]//following::input"))
 	WebElement search_btn;
 
 	
@@ -31,6 +31,7 @@ public class AmazonHomepage extends BaseClass
 	 */
 	public void enter_Input(String search_term) {
 		enterInput(search_box, search_term);
+		clickBtn(search_btn);
 
 	}
 

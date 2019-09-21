@@ -27,13 +27,17 @@ public class ProductPage extends BaseClass
 	
 	public void hoverAction()
 	{
-		moveToElement_ByAction(Featured);
+		clickBtn(Featured);
 		WebElement selectMenuOption=waitCondition(WaitExpectedConditions.PRESENCE_OF_ELEMENT,By.xpath("//a[contains(text(),'Price: Low to High')]"), 10);
 		clickBtn(selectMenuOption);
 	}
 	public void findProduct()
 	{
+		String winHandleBefore = driver.getWindowHandle();
 		clickBtn(starProduct);
+		for(String winHandle : driver.getWindowHandles()){
+		    driver.switchTo().window(winHandle);
+		}
 	}
 	
 

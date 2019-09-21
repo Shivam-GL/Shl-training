@@ -23,6 +23,7 @@ public class AmazonFinalPage extends BaseClass
 	
 	public void knowReview()
 	{
+		
 		clickBtn(reviews);
 	}
 	
