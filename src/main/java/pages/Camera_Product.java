@@ -22,10 +22,11 @@ public class Camera_Product extends BaseClass
 	 */
 	public void compare(int i)
 	{
+		
 		for(int x=1;x<=i;x++)
 		{
-			waitCondition(WaitExpectedConditions.ELEMENT_TO_BE_CLICKABLE,By.xpath("(//span[text()='Add to Compare'])["+x+"]"), 10).click();
-
+			waitCondition(WaitExpectedConditions.ELEMENT_TO_BE_CLICKABLE,By.xpath("(//span[text()='Add to Compare'])["+x+"]"), 10);
+			driver.findElement(By.xpath("(//span[text()='Add to Compare'])["+x+"]")).click();
 		}
 		driver.findElement(By.xpath("//span[text()='COMPARE']")).click();
 	}

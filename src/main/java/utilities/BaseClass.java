@@ -51,9 +51,9 @@ public class BaseClass {
 	/**For Scrolling the window downside
 	 * 
 	 */
-	public void Scroll() {
+	public void Scroll_Click(WebElement element) {
 		 JavascriptExecutor js=(JavascriptExecutor)driver;
-		 js.executeScript("window.scrollBy(0,1000)");
+		 js.executeScript("arguments[0].click();", element);
 	}
 	
 	/**For Clicking the escape button to remove the pop-up
@@ -81,20 +81,20 @@ public class BaseClass {
 	 * @param timeOut::no of seconds required
 	 * @return
 	 */
-	public WebElement waitCondition(WaitExpectedConditions conditions,By locator,int timeOut) 
+	public void waitCondition(WaitExpectedConditions conditions,By locator,int timeOut) 
 	{
 		WebDriverWait wait=new WebDriverWait(driver,timeOut);
-		WebElement wb = null;
+		
 		switch (conditions)
 		{
 		case PRESENCE_OF_ELEMENT:
-							wb= wait.until(ExpectedConditions.presenceOfElementLocated(locator));
+							wait.until(ExpectedConditions.presenceOfElementLocated(locator));
 							break;
 		case ELEMENT_TO_BE_CLICKABLE: 
-							wb=wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+							wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
 						  break;	
 		}
-		return wb;
+		
 	}
 	
 	

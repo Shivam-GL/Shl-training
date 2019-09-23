@@ -14,7 +14,8 @@ public class Second_Secenario_Workpage extends BaseClass
 	WebDriver driver;
 	@FindBy(xpath=(".//span[contains(text(),'Electronics')]"))
 	WebElement menuOption;
-
+	@FindBy(xpath=("//*[text()='Compact & Bridge Cameras']"))
+	WebElement selectMenuOption;
 	public Second_Secenario_Workpage(WebDriver driver) {
 		super(driver);
 		this.driver=driver;
@@ -36,7 +37,7 @@ public class Second_Secenario_Workpage extends BaseClass
 	public void open_Camera()
 	{
 		moveToElement_ByAction(menuOption);
-		WebElement selectMenuOption=waitCondition(WaitExpectedConditions.PRESENCE_OF_ELEMENT,By.xpath("//*[text()='Compact & Bridge Cameras']"), 10);
+		waitCondition(WaitExpectedConditions.PRESENCE_OF_ELEMENT,By.xpath("//*[text()='Compact & Bridge Cameras']"), 10);
 		selectMenuOption.click();
 	}
 

@@ -38,7 +38,6 @@ public class TestScript3 extends Launch
 		page.hoverAction();
 		page.findProduct();
 		finalPage.knowReview();
-		
 	}
 	
 }

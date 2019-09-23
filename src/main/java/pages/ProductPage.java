@@ -15,8 +15,10 @@ public class ProductPage extends BaseClass
 	
 	@FindBy(xpath = ("//span[contains(text(),'Featured')]"))
 	WebElement Featured;
-	@FindBy(xpath = ("((((((//span[contains(text(),'stars')])[1])/ancestor::a)//parent::span)//parent::div)//parent::div)//parent::div//a"))
+	@FindBy(xpath = ("(((((((//span[contains(text(),'stars')])[1])/ancestor::a)//parent::span)//parent::div)//parent::div)//parent::div//a[@class])[1]"))
 	WebElement starProduct;
+	@FindBy(xpath = ("//a[contains(text(),'Price: Low to High')]"))
+	WebElement selectMenuOption;
 	
 	public ProductPage(WebDriver driver) 
 	{
@@ -27,14 +29,18 @@ public class ProductPage extends BaseClass
 	
 	public void hoverAction()
 	{
+		waitCondition(WaitExpectedConditions.PRESENCE_OF_ELEMENT,By.xpath("//span[contains(text(),'Featured')]"),10);
 		clickBtn(Featured);
-		WebElement selectMenuOption=waitCondition(WaitExpectedConditions.PRESENCE_OF_ELEMENT,By.xpath("//a[contains(text(),'Price: Low to High')]"), 10);
+		waitCondition(WaitExpectedConditions.PRESENCE_OF_ELEMENT,By.xpath("//a[contains(text(),'Price: Low to High')]"), 10);
 		clickBtn(selectMenuOption);
+		driver.manage().window().maximize();
+		
 	}
 	public void findProduct()
 	{
 		String winHandleBefore = driver.getWindowHandle();
-		clickBtn(starProduct);
+		waitCondition(WaitExpectedConditions.PRESENCE_OF_ELEMENT,By.xpath("(((((((//span[contains(text(),'stars')])[1])/ancestor::a)//parent::span)//parent::div)//parent::div)//parent::div//a[@class])[1]"), 20);
+		Scroll_Click(starProduct);
 		for(String winHandle : driver.getWindowHandles()){
 		    driver.switchTo().window(winHandle);
 		}

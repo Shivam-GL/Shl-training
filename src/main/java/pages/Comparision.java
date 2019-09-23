@@ -45,13 +45,15 @@ public class Comparision extends BaseClass
 	 */
 	public int minimum_Price(int number)
 	{
-		String first_price=waitCondition(WaitExpectedConditions.PRESENCE_OF_ELEMENT,By.xpath("(//div[@class='row'][2]//div[contains(text(),'₹')][1])[1]"), 10).getText();
+		waitCondition(WaitExpectedConditions.PRESENCE_OF_ELEMENT,By.xpath("(//div[@class='row'][2]//div[contains(text(),'₹')][1])[1]"), 10);
+		String first_price=driver.findElement(By.xpath("(//div[@class='row'][2]//div[contains(text(),'₹')][1])[1]")).getText();
 		String fnew_price=first_price.substring(1);
 		int min=Integer.parseInt(fnew_price.replace(",",""));
 		int index=1;
 		for(int x=2;x<=number;x++)
 		{
-			String price=waitCondition(WaitExpectedConditions.PRESENCE_OF_ELEMENT,By.xpath("(//div[@class='row'][2]//div[contains(text(),'₹')][1])["+x+"]"), 10).getText();
+			waitCondition(WaitExpectedConditions.PRESENCE_OF_ELEMENT,By.xpath("(//div[@class='row'][2]//div[contains(text(),'₹')][1])["+x+"]"), 10);
+			String price=driver.findElement(By.xpath("(//div[@class='row'][2]//div[contains(text(),'₹')][1])["+x+"]")).getText();
 			String new_price=price.substring(1);
 			int i=Integer.parseInt(new_price.replace(",",""));
 			if(i<min)
